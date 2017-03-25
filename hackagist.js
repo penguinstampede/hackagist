@@ -3,16 +3,17 @@
 
 const express     = require('express');
 const hackagist   = express();
-const ejs         = require('ejs');
 
 const port        = process.env.PORT || 8080;
+
+hackagist.set('view engine', 'ejs');
 
 // ROUTES FOR OUR API
 // =============================================================================
 const router = express.Router();
 
 router.get('/', function(req, res) {
-    res.json({ message: 'Good job! You are here!' });
+  res.render('index');
 });
 
 hackagist.use('/', router);

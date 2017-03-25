@@ -14,7 +14,12 @@
   },
   "devDependencies": {
     "chai": "^3.5.0",
-    "chai-http": "^3.0.0",
-    "mocha": "^3.2.0"
+    "chai-webdriver": "^1.2.0",
+    "dotenv": "^4.0.0",
+    "mocha": "^3.2.0",
+    "selenium-webdriver": "^3.3.0"
+  },
+  "scripts": {
+    "test": "mocha --timeout 10000"
   }
 }

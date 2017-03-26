@@ -3,7 +3,8 @@ require('dotenv').config();
 process.env.NODE_ENV = 'test';
 
 //I'm connecting to SauceLabs with envionrment vars for Selenium
-let webdriver = require('selenium-webdriver'),
+let assert = require('assert'),
+  webdriver = require('selenium-webdriver'),
   username    = process.env.SAUCE_USERNAME,
   accessKey   = process.env.SAUCE_ACCESS_KEY,
   driver;
@@ -20,21 +21,32 @@ driver = new webdriver.Builder().
               "@localhost:4445/wd/hub").
   build();
 
-//Require the dev-dependencies
 const chai = require('chai');
 const server = require('../hackagist');
 const chaiWebdriver = require('chai-webdriver');
 
 chai.use(chaiWebdriver(driver));
 
+let url = function(page){
+  return "http://127.0.0.1:8080" + page;
+}
+
+after( (done) => {
+  driver.quit()
+    .then( () => { done(); });
+});
+
 describe('index page', () => {
-  /*
-  * Test the /GET route
-  */
+
+  before( function (done) {
+    this.timeout(0);
+    driver.get(url('/'))
+      .then( () => { done(); });
+  });
+
   describe('load index', () => {
-    it('should reply with "Hello!"', (done) => {
-      driver.get('/')
-      chai.expect('p').dom.to.contain.text("Hello!");
+    it('should provide 50 projects', (done) => {
+      chai.expect('li').dom.to.have.count(50);
       done();
     });
   });

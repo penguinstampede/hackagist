@@ -1,1 +1,7 @@
-<p>Hello!</p>
+<ul>
+  <% project_query.projects.forEach(function(project){ %>
+    <% if (project.name) { %>
+    <li><%= project.name %></li>
+    <% } %>
+  <% }); %>
+</ul>

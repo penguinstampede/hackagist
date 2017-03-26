@@ -1,7 +1,20 @@
-<ul>
-  <% project_query.projects.forEach(function(project){ %>
+<section id="projects">
+  <% the_projects.projects.forEach(function(project){ %>
     <% if (project.name) { %>
-    <li><%= project.name %></li>
+    <article class="project">
+      <hgroup>
+        <h1 class="name"><%= project.name %></h1>
+        <h2 class="owner" data-owner-id="<%= project.owner_id %>"><%= the_owners.find(function(owner) { return owner.id === project.owner_id; }).screen_name %></h2>
+      </hgroup>
+      <p class="description"><%= project.description %></p>
+      <% if (project.tags) { %>
+      <ul class="tags">
+      <% project.tags.forEach(function(tag){ %>
+        <li class="tag"><%= tag %></li>
+      <% }); %>
+      </ul>
+      <% } %>
+    </article>
     <% } %>
   <% }); %>
-</ul>
+</section>

@@ -12,7 +12,7 @@ const port        = process.env.PORT || 8080;
 
 hackagist.set('view engine', 'ejs');
 
-// ROUTES FOR OUR API
+// ROUTES
 // =============================================================================
 const router = express.Router();
 

@@ -9,6 +9,7 @@
   "author": "Erin Kosewic",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^4.0.0",
     "ejs": "^2.5.6",
     "express": "^4.15.2",
     "request": "^2.81.0",
@@ -17,7 +18,6 @@
   "devDependencies": {
     "chai": "^3.5.0",
     "chai-webdriver": "^1.2.0",
-    "dotenv": "^4.0.0",
     "mocha": "^3.2.0",
     "selenium-webdriver": "~2.42.0"
   },

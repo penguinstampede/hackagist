@@ -20,6 +20,7 @@
     "selenium-webdriver": "^3.3.0"
   },
   "scripts": {
+    "start": "node hackagist.js",
     "test": "mocha --timeout 10000"
   }
 }

@@ -18,8 +18,8 @@ const router = express.Router();
 
 router.get('/', function(req, res) {
 
-  var hackaday_projects = {
-    uri: 'https://api.hackaday.io/v1/projects',
+  //trying to keep it dry
+  var hackaday_api_call = {
     qs: {
         api_key: hdapi
     },
@@ -32,18 +32,10 @@ router.get('/', function(req, res) {
 
 
   function get_owners(projects){
-    var hackaday_owners = {
-      qs: {
-          api_key: hdapi
-      },
-      headers: {
-          'User-Agent': 'Request-Promise'
-      },
-      json: true // Automatically parses the JSON string in the response
-    }, promises = [];
+    var promises = [];
     for (p in projects) {
-      hackaday_owners.uri = 'https://api.hackaday.io/v1/users/' + projects[p].owner_id;
-      promises.push(rp(hackaday_owners));
+      hackaday_api_call.uri = 'https://api.hackaday.io/v1/users/' + projects[p].owner_id;
+      promises.push(rp(hackaday_api_call));
     }
 
     Promise.all(promises)
@@ -56,16 +48,20 @@ router.get('/', function(req, res) {
 
   }
 
-  //now we really start. get the project list and move through it.
+  function get_projects(){
+    hackaday_api_call.uri = 'https://api.hackaday.io/v1/projects';
+    rp(hackaday_api_call)
+      .then(function (response) {
+        the_projects = response;
+        get_owners(the_projects.projects);
+      })
+      .catch(function (err) {
+        console.log(err);
+      });
+  }
 
-  rp(hackaday_projects)
-    .then(function (response) {
-      the_projects = response;
-      get_owners(the_projects.projects);
-    })
-    .catch(function (err) {
-      console.log(err);
-    });
+  //now we really start. get the project list and move through it.
+  get_projects();
 
 });
 

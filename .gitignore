@@ -24,7 +24,8 @@ coverage
 .grunt
 
 # Bower dependency directory (https://bower.io/)
-bower_components
+assets/bower
+public/assets/*/*.css.map
 
 # node-waf configuration
 .lock-wscript
@@ -56,4 +57,3 @@ typings/
 
 # dotenv environment variables file
 .env
-

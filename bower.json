@@ -1,0 +1,22 @@
+{
+  "name": "hackagist",
+  "description": "testing the Hackaday API",
+  "main": "hackagist.js",
+  "authors": [
+    "Erin Kosewic"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/penguinstampede/hackagist",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "assets/bower",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "normalize-scss": "^3.0.3"
+  }
+}

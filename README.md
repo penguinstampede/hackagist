@@ -6,3 +6,4 @@
 * EJS
 * Testing with Mocha and Chai-Webdriver using Selenium through SauceLabs
 * Continuous Integration with Travis deploying to Heroku
+* Grunt for SASS compilation and compression

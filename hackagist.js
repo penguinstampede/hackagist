@@ -11,6 +11,7 @@ const hdapi       = process.env.HACKADAY_API_KEY;
 const port        = process.env.PORT || 8080;
 
 hackagist.set('view engine', 'ejs');
+hackagist.use(express.static('public'));
 
 // ROUTES
 // =============================================================================

@@ -24,7 +24,7 @@ let driver = new webdriver.Builder().
   build();
 
 //since we're testing locally
-let url = function(page){
+function url (page){
   return "http://127.0.0.1:8080" + page;
 }
 
@@ -45,8 +45,12 @@ describe('index page', () => {
   });
 
   describe('Render a page that shows a list or grid of projects (using GET /projects).', () => {
-    it('should provide 50 projects', (done) => {
-      chai.expect('article.project').dom.to.have.count(50);
+    it('should provide 10 projects', (done) => {
+      chai.expect('article.project').dom.to.have.count(10);
+      done();
+    });
+    it('should have a hackaday CDN image for every project', (done) => {
+      chai.expect('article.project img').dom.to.have.attribute('src', /[a-z\:\/]*cdn.hackaday.io\/[a-z0-9.\/]*/);
       done();
     });
     it('should have an owner name for every project', (done) => {

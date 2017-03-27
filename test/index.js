@@ -30,17 +30,17 @@ function url (page){
 
 chai.use(chaiWebdriver(driver));
 
-after( (done) => {
-  driver.quit()
-    .then( () => { done(); });
-});
-
 describe('index page', () => {
 
   //load the page first
   before( function (done) {
     this.timeout(0);
     driver.get(url('/'))
+      .then( () => { done(); });
+  });
+
+  after( (done) => {
+    driver.quit()
       .then( () => { done(); });
   });
 

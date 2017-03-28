@@ -6,12 +6,12 @@ require('dotenv').config();
 const express     = require('express');
 const rp          = require('request-promise');
 const hackagist   = express();
-
 const hdapi       = process.env.HACKADAY_API_KEY;
 const port        = process.env.PORT || 8080;
 
 hackagist.set('view engine', 'ejs');
 hackagist.use(express.static('public'));
+hackagist.locals.numeral = require('numeral');
 
 // ROUTES
 // =============================================================================

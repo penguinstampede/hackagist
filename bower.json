@@ -16,7 +16,8 @@
     "test",
     "tests"
   ],
-  "dependencies": {
-    "normalize-scss": "^3.0.3"
+  "devDependencies": {
+    "normalize-scss": "^3.0.3",
+    "foundation-icon-fonts": "*"
   }
 }

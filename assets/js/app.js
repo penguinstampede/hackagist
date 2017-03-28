@@ -16,15 +16,19 @@ function show_owner_tooltip(el){
     var tooltip = document.createElement("div");
     tooltip.classList.add('tooltip');
     var template = document.getElementById('tooltip-template').innerHTML;
-    tooltip.innerHTML = Mustache.render(template, info);
+    template = template.replace(/&lt;/g, '<');
+    template = template.replace(/&gt;/g, '>');
+    tooltip.innerHTML = ejs.render(template, info);
     hgroup.appendChild(tooltip);
   }
 }
 
 function hide_owner_tooltip(el){
   var hgroup = el.parentNode;
-  var tooltip = el.nextElementSibling;
-  hgroup.removeChild(tooltip);
+  if(el.nextElementSibling !== null){
+    var tooltip = el.nextElementSibling;
+    hgroup.removeChild(tooltip);
+  }
 }
 
 function get_owner(owner_id){
@@ -74,6 +78,7 @@ function check_owners(){
 }
 
 function start_listening(){
+  //get owner info for tooltips
   var project_owners = document.querySelectorAll('.project .owner');
   Array.prototype.forEach.call(project_owners, function(el, i){
     el.addEventListener("mouseenter", function( event ) {

@@ -1,10 +1,24 @@
+//$fa-font-path:        "//netdna.bootstrapcdn.com/font-awesome/4.7.0/fonts" !default; // for referencing Bootstrap CDN font files directly
+$fi-path: "//cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/" !default;
+
 @import 'normalize-scss/_normalize.scss';
+@import 'foundation-icon-fonts/_foundation-icons.scss';
 
 // some defaults
 
 $black: #000;
 $white: #fff;
 $light-gray: #ccc;
+$gutter: 1rem;;
+
+//screen readers, because why not
+.for-sr-only{
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px;
+  overflow: hidden;
+  position: absolute !important;
+  width: 1px;
+}
 
 body{
   background: $black;
@@ -12,8 +26,8 @@ body{
 
 #projects{
   column-count: 3;
-  column-gap: 1rem;
-  padding: 0 1rem;
+  column-gap: $gutter;
+  padding: 0 $gutter;
   width: 100%;
   max-width: 85vw;
   margin: 0 auto;
@@ -22,7 +36,7 @@ body{
     column-span: none;
     -webkit-column-span: none;
 
-    margin-bottom: 1rem;
+    margin-bottom: $gutter;
     border: 1px solid $light-gray;
     background: $white;
 
@@ -32,7 +46,7 @@ body{
     }
 
     hgroup, .info, .summary{
-      padding: 0 1rem 1rem 1rem;
+      padding: 0 $gutter;
     }
 
     p{
@@ -47,16 +61,68 @@ body{
       .tooltip{
         position: absolute;
         top: 100%;
-        width: 300px;
-        height: 200px;
-        background: rgba($black, .5);
+        left: 0;
+        width: 100%;
+        background: rgba($black, .75);
+
+        .tooltip-wrap{ padding: $gutter; }
+
+        .image{
+          float: left;
+          width: 20%;
+          padding-right: $gutter;
+        }
+
+        .summary{
+          float: left;
+          color: $white;
+
+          h1{ margin: 0; }
+          small{ font-style: italic; }
+
+          a{
+            color: $white;
+            text-decoration: none;
+
+            &:hover{
+              text-decoration: underline;
+            }
+
+          }
+
+        }
+
       }
+
     }
 
     .summary{
+      padding-bottom: $gutter;
+
+      ul.meta{
+        padding: 0;
+        margin: 0;
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        li{
+          list-style: none;
+          min-width: 25%;
+        }
+      }
+
       .more{
         display: block;
+        margin: $gutter 0 0 0;
+        background: $light-gray;
+        padding: 6px;
         text-align: center;
+        color: $black;
+        text-decoration: none;
+        &:hover{
+          background: $black;
+          color: $white;
+        }
       }
     }
 

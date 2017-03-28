@@ -17,11 +17,12 @@
           <div class="summary">
             <p><%= project.summary %></p>
             <ul class="meta">
-              <li>Views: <%= project.views %></li>
-              <li>Comments: <%= project.comments %></li>
-              <li>Skulls: <%= project.skulls %></li>
-              <li>Followers: <%= project.followers %></li>
+              <li><span class="for-sr-only">Views:</span><i class="fi-eye" title="Views"></i> <%= numeral(project.views).format('0[.]0a') %></li>
+              <li><span class="for-sr-only">Followers:</span><i class="fi-torsos-all" title="Followers"></i> <%= numeral(project.followers).format('0[.]0a') %></li>
+              <li><span class="for-sr-only">Comments:</span><i class="fi-comment" title="Comments"></i> <%= numeral(project.comments).format('0[.]0a') %></li>
+              <li><span class="for-sr-only">Skulls:</span><i class="fi-skull" title="Skulls"></i> <%= numeral(project.skulls).format('0[.]0a') %></li>
             </ul>
+            <!---do we need to show more? -->
             <a class="more" href="#">View More</a>
           </div>
           <div class="info">

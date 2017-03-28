@@ -1,15 +1,18 @@
 <script id="tooltip-template" type="text/template">
-  <div class="tooltip">
-    <a href="{{url}}"><img src="{{image_url}}" alt="{{screen_name}}"></a>
-    <h1><a href="{{url}}">{{screen_name}}</a></h1>
-    <p class="location">{{location}}</p>
-    <p class="since">{{created}}</p>
-    <ul class="meta">
-      <li>Followers: {{followers}}</li>
-      <li>Followers: {{followers}}</li>
-      <li>Followers: {{followers}}</li>
-      <li>Followers: {{followers}}</li>
-    </ul>
-    <p class="about">{{about_me}}</p>
+  <div class="tooltip-wrap">
+    <a href="&lt;%=url%&gt;"><img class="image" src="&lt;%=image_url%&gt;" alt="&lt;%=screen_name%&gt;"></a>
+    <div class="summary">
+      <h1><a href="&lt;%=url%&gt;">&lt;%=screen_name%&gt;</a></h1>
+      <small>(&lt;%=username%&gt;)</small>
+      <p class="location">&lt;%=location%&gt;</p>
+      <p class="since">Joined &lt;%= moment(created, 'X').fromNow() %&gt;</p>
+      <ul class="meta">
+        <li><span class="for-sr-only">Followers:</span><i class="fi-torsos-all" title="Followers"></i> &lt;%= numeral(followers).format('0[.]0a') %&gt;</li>
+        <li><span class="for-sr-only">Following:</span><i class="fi-heart" title="Following"></i> &lt;%= numeral(following).format('0[.]0a') %&gt;</li>
+        <li><span class="for-sr-only">Projects:</span><i class="fi-wrench" title="Projects"></i> &lt;%= numeral(projects).format('0[.]0a') %&gt;</li>
+        <li><span class="for-sr-only">Skulls:</span><i class="fi-skull" title="Skulls"></i> &lt;%= numeral(skulls).format('0[.]0a') %&gt;</li>
+      </ul>
+    </div>
+    <p class="about">&lt;%=about_me%&gt;</p>
   </div>
 </script>

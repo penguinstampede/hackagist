@@ -14,14 +14,26 @@
             <h1 class="name"><%= project.name %></h1>
             <h2 class="owner" data-owner-id="<%= project.owner_id %>"><%= the_owners.find(function(owner) { return owner.id === project.owner_id; }).screen_name %></h2>
           </hgroup>
-          <p class="description"><%= project.description %></p>
-          <% if (project.tags) { %>
-          <ul class="tags">
-          <% project.tags.forEach(function(tag){ %>
-            <li class="tag"><%= tag %></li>
-          <% }); %>
-          </ul>
-          <% } %>
+          <div class="summary">
+            <p><%= project.summary %></p>
+            <ul class="meta">
+              <li>Views: <%= project.views %></li>
+              <li>Comments: <%= project.comments %></li>
+              <li>Skulls: <%= project.skulls %></li>
+              <li>Followers: <%= project.followers %></li>
+            </ul>
+            <a class="more" href="#">View More</a>
+          </div>
+          <div class="info">
+            <p class="description"><%= project.description %></p>
+            <% if (project.tags) { %>
+            <ul class="tags">
+            <% project.tags.forEach(function(tag){ %>
+              <li class="tag"><%= tag %></li>
+            <% }); %>
+            </ul>
+            <% } %>
+          </div>
         </article>
         <% } %>
       <% }); %>

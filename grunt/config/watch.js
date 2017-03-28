@@ -1,7 +1,7 @@
 module.exports = {
   sass: {
     files: ['assets/scss/*.{sass,scss,css}'],
-    tasks: ['sass']
+    tasks: ['sass:dev']
   },
   express: {
     files:  [ '**/*.js' ],

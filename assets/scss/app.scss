@@ -1,1 +1,95 @@
-@import 'normalize-scss/_normalize.scss'
+@import 'normalize-scss/_normalize.scss';
+
+// some defaults
+
+$black: #000;
+$white: #fff;
+$light-gray: #ccc;
+
+body{
+  background: $black;
+}
+
+.masonry-layout {
+  column-count: 3;
+  column-gap: 0;
+}
+.masonry-layout-panel {
+  break-inside: avoid;
+  padding: 5px;
+}
+.masonry-layout-panel__content {
+  padding: 10px;
+  border-radius: 10px;
+}
+
+#projects{
+  column-count: 3;
+  column-gap: 1rem;
+  padding: 0 1rem;
+  width: 100%;
+  max-width: 85vw;
+  margin: 0 auto;
+
+  .project{
+    column-span: none;
+    -webkit-column-span: none;
+
+    margin-bottom: 1rem;
+    border: 1px solid $light-gray;
+    background: $white;
+
+    .image{
+      max-width: 100%;
+      height: auto;
+    }
+
+    hgroup, .info, .summary{
+      padding: 0 1rem 1rem 1rem;
+    }
+
+    p{
+      line-height: 160%;
+    }
+
+    .summary{
+      .more{
+        display: block;
+        text-align: center;
+      }
+    }
+
+    .info{
+      display: none;
+
+      ul.tags{
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        margin: 0;
+        padding: 0;
+
+        .tag{
+          list-style: none;
+          text-align: center;
+          text-transform: lowercase;
+          margin: 5px;
+          padding: 5px;
+          min-width: 20%;
+          font-size: 75%;
+        }
+
+      }
+
+    }
+
+  }
+
+}
+
+
+@media (max-width: 400px) {
+  #projects{
+    column-count: 1;
+  }
+}

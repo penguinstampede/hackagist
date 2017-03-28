@@ -16,6 +16,7 @@
           </hgroup>
           <div class="summary">
             <p><%= project.summary %></p>
+            <p><%= moment(project.created, 'X').fromNow() %></p>
             <ul class="meta">
               <li><span class="for-sr-only">Views:</span><i class="fi-eye" title="Views"></i> <%= numeral(project.views).format('0[.]0a') %></li>
               <li><span class="for-sr-only">Followers:</span><i class="fi-torsos-all" title="Followers"></i> <%= numeral(project.followers).format('0[.]0a') %></li>

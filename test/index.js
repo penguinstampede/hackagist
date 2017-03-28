@@ -14,8 +14,8 @@ const assert    = require('assert'),
 let driver = new webdriver.Builder().
   withCapabilities({
     'browserName': 'chrome',
-    'platform': 'Windows XP',
-    'version': '43.0',
+    'platform': 'Windows 7',
+    'version': '50.0',
     'username': username,
     'accessKey': accessKey
   }).

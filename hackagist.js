@@ -42,7 +42,7 @@ router.get('/', function(req, res) {
         //an array of other Promise functions in case we need to get more info in the future
         Promise.all([get_owners(the_projects.projects)])
           .then(function(){
-            res.render('index', {the_projects: the_projects, the_owners: the_owners});
+            res.render('index', {the_projects: the_projects, the_owners: the_owners, hdapi: hdapi});
           });
       })
       .catch(function (err) {

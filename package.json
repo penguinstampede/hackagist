@@ -29,7 +29,7 @@
     "selenium-webdriver": "~2.42.0"
   },
   "scripts": {
-    "preinstall": "[ \"$NODE_ENV\" = production ] && exit 0; (npm list grunt-cli -g || sudo npm install grunt-cli -g) && (npm list bower -g || sudo npm install bower -g)",
+    "preinstall": "[ \"$NODE_ENV\" = test ] && exit 0; (npm list grunt-cli -g || sudo npm install grunt-cli -g) && (npm list bower -g || sudo npm install bower -g)",
     "start": "node hackagist.js",
     "test": "mocha --timeout 10000"
   }

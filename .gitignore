@@ -26,6 +26,7 @@ coverage
 # Bower dependency directory (https://bower.io/)
 assets/bower
 public/assets/*/*.css.map
+public/assets/*/*.js.map
 
 # node-waf configuration
 .lock-wscript

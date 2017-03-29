@@ -36,7 +36,7 @@ router.get('/', function(req, res) {
 
   function get_projects(){
     hackaday_api_call.uri = 'https://api.hackaday.io/v1/projects';
-    hackaday_api_call.qs.per_page = 10;
+    hackaday_api_call.qs.per_page = 12;
     rp(hackaday_api_call)
       .then(function (response) {
         the_projects = response;

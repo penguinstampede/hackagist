@@ -45,8 +45,8 @@ describe('index page', () => {
   });
 
   describe('Render a page that shows a list or grid of projects (using GET /projects).', () => {
-    it('should provide 10 projects', (done) => {
-      chai.expect('article.project').dom.to.have.count(10);
+    it('should provide 12 projects', (done) => {
+      chai.expect('article.project').dom.to.have.count(12);
       done();
     });
     it('should have a hackaday CDN image for every project', (done) => {
@@ -59,10 +59,6 @@ describe('index page', () => {
     });
     it('should have an owner id stored in data-owner-id for every project', (done) => {
       chai.expect('article.project h2.owner').dom.to.have.attribute('data-owner-id');
-      done();
-    });
-    it('should not have an empty list of tags', (done) => {
-      chai.expect('article.project .tags:empty').dom.to.have.count(0);
       done();
     });
   });

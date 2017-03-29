@@ -2,14 +2,28 @@
 $fi-path: "//cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/" !default;
 
 @import 'normalize-scss/_normalize.scss';
+@import 'simple-grid';
 @import 'foundation-icon-fonts/_foundation-icons.scss';
+
+@mixin card($background-color,$border-color,$text-color){
+  background: $background-color;
+  width: 100%;
+  border: 1px solid $border-color;
+  border-radius: 6px;
+  color: $text-color;
+}
 
 // some defaults
 
 $black: #000;
 $white: #fff;
 $light-gray: #ccc;
+$blue: #353d82;
 $gutter: 1rem;;
+
+h1,h2,h3,h4,h5,h6{
+  font-family: 'Oswald', sans-serif;
+}
 
 //screen readers, because why not
 .for-sr-only{
@@ -21,24 +35,33 @@ $gutter: 1rem;;
 }
 
 body{
-  background: $black;
+  font-family: 'Dosis', sans-serif;
+  background: $blue;
 }
 
 #projects{
-  column-count: 3;
-  column-gap: $gutter;
-  padding: 0 $gutter;
-  width: 100%;
-  max-width: 85vw;
-  margin: 0 auto;
+  opacity: 0;
 
   .project{
-    column-span: none;
-    -webkit-column-span: none;
 
     margin-bottom: $gutter;
-    border: 1px solid $light-gray;
-    background: $white;
+
+    .project-wrap{
+      @include card($white, $light-gray, $black);
+      opacity: .5;
+      transition: opacity .25s;
+
+      &:hover{
+        opacity: 1;
+      }
+
+      > .image{
+        border-top-left-radius: 6px;
+        border-top-right-radius: 6px;
+        border-bottom: 1px solid $black;
+      }
+
+    }
 
     .image{
       max-width: 100%;
@@ -51,34 +74,57 @@ body{
 
     p{
       line-height: 160%;
+      &.created{
+        font-style: italic;
+        margin-top: .5rem;
+      }
     }
 
     hgroup{
       position: relative;
+      h1{
+        margin: .5rem 0 .25rem 0;
+      }
       h2{
-        margin-bottom: 0;
+        margin: 0;
       }
       .tooltip{
         position: absolute;
+        transition: opacity .25s;
+        z-index: 999;
         top: 100%;
-        left: 0;
-        width: 100%;
-        background: rgba($black, .75);
+        left: 5%;
+        @include card(rgba($black, .85), $light-gray, $white);
 
-        .tooltip-wrap{ padding: $gutter; }
+        .tooltip-wrap{
+          padding: $gutter;
+          .row{
+            display: flex;
+            align-items: center;
+          }
+        }
 
-        .image{
-          float: left;
+        .avatar{
           width: 20%;
           padding-right: $gutter;
+          .image{
+            border-radius: 6px;
+            border: 1px solid $black;
+          }
+          p.location{
+            margin-top: .25rem;
+            text-align: center;
+            font-size: rem-calc(12);
+          }
         }
 
         .summary{
-          float: left;
+          width: calc(80% - 1rem);
           color: $white;
 
           h1{ margin: 0; }
           small{ font-style: italic; }
+          p.since{ margin-top: .25rem; }
 
           a{
             color: $white;
@@ -96,20 +142,30 @@ body{
 
     }
 
-    .summary{
-      padding-bottom: $gutter;
-
-      ul.meta{
-        padding: 0;
-        margin: 0;
-        display: flex;
-        justify-content: space-between;
-        width: 100%;
-        li{
-          list-style: none;
-          min-width: 25%;
+    ul.meta{
+      padding: 0;
+      margin: 0;
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      li{
+        list-style: none;
+        min-width: 25%;
+        font-size: rem-calc(16);
+        text-align: center;
+        i{
+          font-size:rem-calc(20);
+          padding-right: .25rem;
+          &:before{
+            position: relative;
+            top: 2px;
+          }
         }
       }
+    }
+
+    .summary{
+      padding-bottom: $gutter;
 
       .more{
         display: block;

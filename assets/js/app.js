@@ -7,6 +7,22 @@
 * sessionstorage instead of localstorage just in case some info about the user changes... but we don't need to keep re-querying the API!
 **/
 
+function fadeIn(el) {
+  el.style.opacity = 0;
+
+  var last = +new Date();
+  var tick = function() {
+    el.style.opacity = +el.style.opacity + (new Date() - last) / 400;
+    last = +new Date();
+
+    if (+el.style.opacity < 1) {
+      (window.requestAnimationFrame && requestAnimationFrame(tick)) || setTimeout(tick, 16);
+    }
+  };
+
+  tick();
+}
+
 function show_owner_tooltip(el){
   //is there already a tooltip showing here?
   var hgroup = el.parentNode;
@@ -78,6 +94,15 @@ function check_owners(){
 }
 
 function start_listening(){
+  imagesLoaded( document.getElementById('projects'), function( instance ) {
+    var msnry = new Masonry( '.row', {
+      itemSelector: '.project'
+    });
+    fadeIn(document.getElementById('projects'));
+  });
+
+
+
   //get owner info for tooltips
   var project_owners = document.querySelectorAll('.project .owner');
   Array.prototype.forEach.call(project_owners, function(el, i){

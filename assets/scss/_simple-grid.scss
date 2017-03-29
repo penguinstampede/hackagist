@@ -1,0 +1,132 @@
+// stole this from Zurb, no shame. only pass em or px.
+
+@function strip-unit($num) {
+  @return $num / ($num * 0 + 1);
+}
+
+@function rem-calc($value, $base: 14) {
+  // Check if the value is a number
+  @if type-of($value) != 'number' {
+    @warn inspect($value) + ' was passed to rem-calc(), which is not a number.';
+    @return $value;
+  }
+
+  // Transform em into rem if someone hands over 'em's
+  @if unit($value) == 'em' {
+    $value: strip-unit($value) * 1rem;
+  }
+
+  // Calculate rem if units for $value is not rem or em
+  @if unit($value) != 'rem' {
+    $value: strip-unit($value) / strip-unit($base) * 1rem;
+  }
+
+  // Turn 0rem into 0
+  @if $value == 0rem {
+    $value: 0;
+  }
+
+  @return $value;
+}
+
+// utility
+
+.left {
+  text-align: left;
+}
+
+.right {
+  text-align: right;
+}
+
+.center {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.justify {
+  text-align: justify;
+}
+
+.hidden-sm {
+  display: none;
+}
+
+// grid
+
+$width: 96%;
+$gutter: 2%;
+$columns: 12;
+$breakpoint-small: rem-calc(480);
+$breakpoint-med: rem-calc(720);
+$breakpoint-large: rem-calc(1280);
+$breakpoint-xlarge: rem-calc(1660);
+
+.container {
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+
+  @media only screen and (max-width: $breakpoint-small) {
+    width: 100%;
+  }
+
+  @media only screen and (min-width: $breakpoint-xlarge) {
+    width: 80%;
+    max-width: rem-calc(1840);
+  }
+}
+
+.row {
+  position: relative;
+  width: 100%;
+
+  &::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+  [class*="col"] {
+    float: left;
+    margin: 0.5rem $gutter / 2;
+    min-height: 0.125rem;
+  }
+
+}
+
+@for $i from 1 through $columns {
+
+  .col {
+
+    &-#{$i} {
+      width: $width;
+
+      @media only screen and (min-width: $breakpoint-med) {
+        width: (100% / $columns * $i - $gutter);
+      }
+
+    }
+
+    &-#{$i}-sm {
+      @media only screen and (max-width: $breakpoint-small) {
+        width: (100% / $columns * $i - $gutter) !important;
+      }
+    }
+
+    &-#{$i}-md {
+      @media only screen and (min-width: $breakpoint-small) and (max-width: $breakpoint-med) {
+        width: (100% / $columns * $i - $gutter) !important;
+      }
+    }
+
+  }
+
+}
+
+@media only screen and (min-width: $breakpoint-med) {
+  .hidden-sm {
+    display: block;
+  }
+}

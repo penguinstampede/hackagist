@@ -3,7 +3,10 @@ function show_projects(btn){
     project_container = document.getElementById('projects'),
     current_page = (btn.parentNode.parentNode.parentNode.nextElementSibling.getAttribute('data-page-number') * 1);
   project_container.style.opacity = 0;
-  btn.parentNode.parentNode.parentNode.setAttribute('data-display', layout);
+  var view_type = document.querySelectorAll('.view-type');
+  for (var i = 0, max = view_type.length; i < max; i++) {
+    view_type[i].setAttribute('data-display', layout);
+  }
   get_project_page(current_page, layout);
 }
 
@@ -71,7 +74,10 @@ function change_project_page(btn){
   else
     page_to_load = current_page + 1;
   get_project_page(page_to_load, layout);
-  btn.parentNode.parentNode.parentNode.setAttribute('data-page-number', page_to_load);
+  var pagination = document.querySelectorAll('nav.pagination');
+  for (var i = 0, max = pagination.length; i < max; i++) {
+    pagination[i].setAttribute('data-page-number', page_to_load);
+  }
   var page_number = document.querySelectorAll('.page-number');
   for (var i = 0, max = page_number.length; i < max; i++) {
     page_number[i].innerHTML = page_to_load;

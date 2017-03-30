@@ -26,11 +26,12 @@ $fi-path: "//cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/" !default;
 $black: #000;
 $white: #fff;
 $light-gray: #ccc;
-$blue: #353d82;
+$blue: #6D1B9D;
 $gutter: 1rem;;
 
 h1,h2,h3,h4,h5,h6{
-  font-family: 'Oswald', sans-serif;
+  font-family: 'Teko', sans-serif;
+  font-weight: 500;
 }
 
 //screen readers, because why not
@@ -44,14 +45,14 @@ h1,h2,h3,h4,h5,h6{
 
 body{
   font-family: 'Dosis', sans-serif;
-  background: $blue;
+  background: #EBEBEB;
 }
 
 #intro{
   height: 40vh;
   padding: 5vh 0;
-  color: $white;
-  text-shadow: 1px 1px 1px $black;
+  color: $blue;
+  text-shadow: 1px 1px 1px rgba($black, .1);
   text-align: center;
   h1{ font-size: rem-calc(60); }
   p{ font-size: rem-calc(20); }
@@ -66,7 +67,7 @@ nav.pagination, .view-type{
       display: inline-block;
       padding: 0 rem-calc(6);
       a{
-        color: $white;
+        color: $blue;
         text-decoration: none;
         &.disabled{
           color: $black;
@@ -92,7 +93,7 @@ nav.pagination ul{ float: right; }
 
     .project-wrap{
       @include card($white, $light-gray, $black);
-      opacity: .5;
+      opacity: .7;
       transition: opacity .25s;
 
       &:hover{

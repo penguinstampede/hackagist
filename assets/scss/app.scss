@@ -4,6 +4,7 @@ $fi-path: "//cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/" !default;
 @import 'normalize-scss/_normalize.scss';
 @import 'simple-grid';
 @import 'foundation-icon-fonts/_foundation-icons.scss';
+@import 'spinners/stylesheets/spinners';
 
 %clearfix {
   &:after {
@@ -82,6 +83,18 @@ nav.pagination, .view-type{
 
 .view-type a i{ padding-right: 2px; }
 nav.pagination ul{ float: right; }
+
+#loading{
+  position: absolute;
+  width: 100%;
+  z-index: 9999;
+  text-align: center;
+  padding: $gutter 0;
+  transition: opacity .25s;
+  .spin{
+    @include spinner(2em, border-color $blue);
+  }
+}
 
 #projects{
   opacity: 0;

@@ -101,8 +101,8 @@ function change_project_page(btn){
 }
 
 function get_project_page(page_id, layout){
-  var project_container = document.getElementById('projects');
-  project_container.style.opacity = 0;
+  document.getElementById('projects').style.opacity = 0;
+  document.getElementById('loading').style.opacity = 1;
 
   if (get_project_page_from_storage(page_id)) {
     the_projects = get_project_page_from_storage(page_id);
@@ -122,6 +122,7 @@ function refresh_project_grid(){
     var msnry = new Masonry( '#projects .row', {
       itemSelector: '.project'
     });
+    document.getElementById('loading').style.opacity = 0;
     document.getElementById('projects').style.opacity = 1;
   });
 

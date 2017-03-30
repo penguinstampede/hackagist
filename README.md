@@ -18,3 +18,4 @@ Personal Goal: Learn some new stuff, avoid any bloated CSS Framework.
 * Normalize
 * ImagesLoaded
 * Masonry
+* Spinners

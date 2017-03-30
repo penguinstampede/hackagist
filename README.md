@@ -2,6 +2,8 @@
 
 [![Build Status](https://travis-ci.org/penguinstampede/hackagist.svg?branch=master)](https://travis-ci.org/penguinstampede/hackagist)
 
+[See it on Heroku!](https://still-forest-14776.herokuapp.com/)
+
 Goal: Display a selection of Hackaday projects, with pagination and grid/list view, using vanilla JavaScript.
 
 Personal Goal: Learn some new stuff, avoid any bloated CSS Framework.

@@ -1819,6 +1819,11 @@ th {
 .fi-zoom-out:before {
   content: "\f21a"; }
 
+#projects .project.list .project-wrap:after {
+  content: "";
+  display: table;
+  clear: both; }
+
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Oswald', sans-serif; }
 
@@ -1912,7 +1917,8 @@ nav.pagination ul {
         width: 100%;
         border: 1px solid #ccc;
         border-radius: 6px;
-        color: #fff; }
+        color: #fff;
+        max-width: 34.2857142857rem; }
         #projects .project hgroup .tooltip .tooltip-wrap {
           padding: 1rem; }
           #projects .project hgroup .tooltip .tooltip-wrap .row {
@@ -1988,6 +1994,21 @@ nav.pagination ul {
           padding: 5px;
           min-width: 20%;
           font-size: 75%; }
+    #projects .project.list {
+      width: 100%; }
+      #projects .project.list .project-wrap > .image {
+        max-width: 33%;
+        float: left;
+        margin-right: 1rem;
+        border-top-right-radius: 0;
+        border-bottom-left-radius: 6px;
+        border-bottom: 0;
+        border-right: 1px solid #000; }
+      #projects .project.list .project-wrap > div {
+        float: left;
+        width: 65.5%;
+        padding-top: 1rem;
+        padding-bottom: 1rem; }
 
 @media (max-width: 400px) {
   #projects {

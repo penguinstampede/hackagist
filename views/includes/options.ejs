@@ -1,10 +1,10 @@
 <section class="options container">
   <div class="row">
-    <div class="view-type col-6 col-6-sm">
+    <div class="view-type col-6 col-6-sm" data-display="grid">
       <ul>
         <li>Display:</li>
-        <li><a href="#"><i class="fi-thumbnails"></i> Grid</a></li>
-        <li><a href="#"><i class="fi-list"></i> List</a></li>
+        <li><a href="#" class="show" data-show="grid"><i class="fi-thumbnails"></i> Grid</a></li>
+        <li><a href="#" class="show" data-show="list"><i class="fi-list"></i> List</a></li>
       </ul>
     </div>
     <nav class="pagination col-6 col-6-sm" data-page-number="<%= the_projects.page %>" data-last-page="<%= the_projects.last_page %>">

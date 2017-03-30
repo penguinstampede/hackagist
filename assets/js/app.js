@@ -39,8 +39,16 @@ function start_listening(){
     el.addEventListener("click", function( event ) {
       event.preventDefault();
       if(!hasClass(el, 'disabled')){
-        get_project_page(el);
+        change_project_page(el);
       }
+    }, false);
+  });
+
+  var view_buttons = document.querySelectorAll('.view-type .show');
+  Array.prototype.forEach.call(view_buttons, function(el, i){
+    el.addEventListener("click", function( event ) {
+      event.preventDefault();
+      show_projects(el);
     }, false);
   });
 

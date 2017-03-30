@@ -1,14 +1,20 @@
-function create_project_layout(a) {
-    Promise.all([ get_owners(a.projects) ]).then(function(b) {
-        var c = document.getElementById("projects");
-        getTemplate("/assets/ejs/project-grid.ejs", function(d, e) {
-            if (d) throw d;
+function show_projects(a) {
+    var b = a.getAttribute("data-show"), c = document.getElementById("projects"), d = 1 * a.parentNode.parentNode.parentNode.nextElementSibling.getAttribute("data-page-number");
+    c.style.opacity = 0, a.parentNode.parentNode.parentNode.setAttribute("data-display", b), 
+    get_project_page(d, b);
+}
+
+function create_project_layout(a, b) {
+    Promise.all([ get_owners(a.projects) ]).then(function(c) {
+        var d = document.getElementById("projects");
+        getTemplate("/assets/ejs/project-" + b + ".ejs", function(b, e) {
+            if (b) throw b;
             var f = document.createElement("div");
             f.classList.add("row"), f.innerHTML = ejs.render(e, {
                 the_projects: a,
-                the_owners: b[0]
+                the_owners: c[0]
             }), window.setTimeout(function() {
-                c.innerHTML = "", c.appendChild(f), refresh_project_grid();
+                d.innerHTML = "", d.appendChild(f), refresh_project_grid();
             }, 500);
         });
     });
@@ -32,15 +38,18 @@ function get_project_page_from_api(a, b) {
     }, c.send();
 }
 
-function get_project_page(a) {
-    document.getElementById("projects").style.opacity = 0;
-    var b = a.getAttribute("data-direction"), c = 1 * a.parentNode.parentNode.parentNode.getAttribute("data-page-number"), d = 1 * a.parentNode.parentNode.parentNode.getAttribute("data-last-page"), e = 1;
-    e = "prev" == b ? c - 1 : c + 1, get_project_page_from_storage(e) ? (the_projects = get_project_page_from_storage(e), 
-    create_project_layout(the_projects)) : get_project_page_from_api(e, function(a, b) {
-        null == a ? create_project_layout(b) : console.log("error!");
-    }), a.parentNode.parentNode.parentNode.setAttribute("data-page-number", e);
-    for (var f = document.querySelectorAll(".page-number"), g = 0, h = f.length; g < h; g++) f[g].innerHTML = e;
-    if (e > 1 && e < d) for (var f = document.querySelectorAll(".page-turn"), g = 0, h = f.length; g < h; g++) f[g].classList = "page-turn"; else if (1 == e) for (var f = document.querySelectorAll('.page-turn[data-direction="prev"]'), g = 0, h = f.length; g < h; g++) f[g].classList = "page-turn disabled"; else if (e == d) for (var f = document.querySelectorAll('.page-turn[data-direction="next"]'), g = 0, h = f.length; g < h; g++) f[g].classList = "page-turn disabled";
+function change_project_page(a) {
+    var b = a.getAttribute("data-direction"), c = 1 * a.parentNode.parentNode.parentNode.getAttribute("data-page-number"), d = 1 * a.parentNode.parentNode.parentNode.getAttribute("data-last-page"), e = a.parentNode.parentNode.parentNode.previousElementSibling.getAttribute("data-display"), f = 1;
+    f = "prev" == b ? c - 1 : c + 1, get_project_page(f, e), a.parentNode.parentNode.parentNode.setAttribute("data-page-number", f);
+    for (var g = document.querySelectorAll(".page-number"), h = 0, i = g.length; h < i; h++) g[h].innerHTML = f;
+    if (f > 1 && f < d) for (var g = document.querySelectorAll(".page-turn"), h = 0, i = g.length; h < i; h++) g[h].classList = "page-turn"; else if (1 == f) for (var g = document.querySelectorAll('.page-turn[data-direction="prev"]'), h = 0, i = g.length; h < i; h++) g[h].classList = "page-turn disabled"; else if (f == d) for (var g = document.querySelectorAll('.page-turn[data-direction="next"]'), h = 0, i = g.length; h < i; h++) g[h].classList = "page-turn disabled";
+}
+
+function get_project_page(a, b) {
+    document.getElementById("projects").style.opacity = 0, get_project_page_from_storage(a) ? (the_projects = get_project_page_from_storage(a), 
+    create_project_layout(the_projects, b)) : get_project_page_from_api(a, function(a, c) {
+        null == a ? create_project_layout(c, b) : console.log("error!");
+    });
 }
 
 function refresh_project_grid() {
@@ -149,7 +158,13 @@ function start_listening() {
     var a = document.querySelectorAll("nav .page-turn");
     Array.prototype.forEach.call(a, function(a, b) {
         a.addEventListener("click", function(b) {
-            b.preventDefault(), hasClass(a, "disabled") || get_project_page(a);
+            b.preventDefault(), hasClass(a, "disabled") || change_project_page(a);
+        }, !1);
+    });
+    var b = document.querySelectorAll(".view-type .show");
+    Array.prototype.forEach.call(b, function(a, b) {
+        a.addEventListener("click", function(b) {
+            b.preventDefault(), show_projects(a);
         }, !1);
     }), refresh_project_grid();
 }

@@ -1,9 +1,18 @@
-function create_project_layout(the_projects){
+function show_projects(btn){
+  var layout = btn.getAttribute('data-show'),
+    project_container = document.getElementById('projects'),
+    current_page = (btn.parentNode.parentNode.parentNode.nextElementSibling.getAttribute('data-page-number') * 1);
+  project_container.style.opacity = 0;
+  btn.parentNode.parentNode.parentNode.setAttribute('data-display', layout);
+  get_project_page(current_page, layout);
+}
+
+function create_project_layout(the_projects, layout){
   //we need to get the owner names!
   Promise.all([get_owners(the_projects.projects)])
     .then(function(the_owners){
       var project_container = document.getElementById('projects');
-      getTemplate('/assets/ejs/project-grid.ejs', function (err, tpl) {
+      getTemplate('/assets/ejs/project-' + layout + '.ejs', function (err, tpl) {
         if (err) {
             throw err;
         }
@@ -51,28 +60,17 @@ function get_project_page_from_api(page_id, callback){
   request.send();
 }
 
-function get_project_page(btn){
-  var project_container = document.getElementById('projects');
-  project_container.style.opacity = 0;
-  var direction = btn.getAttribute('data-direction'),
-    current_page = (btn.parentNode.parentNode.parentNode.getAttribute('data-page-number') * 1),
-    last_page =  (btn.parentNode.parentNode.parentNode.getAttribute('data-last-page') * 1),
+function change_project_page(btn){
+  var direction   = btn.getAttribute('data-direction'),
+    current_page  = (btn.parentNode.parentNode.parentNode.getAttribute('data-page-number') * 1),
+    last_page     = (btn.parentNode.parentNode.parentNode.getAttribute('data-last-page') * 1),
+    layout        = btn.parentNode.parentNode.parentNode.previousElementSibling.getAttribute('data-display'),
     page_to_load = 1;
   if(direction == 'prev')
     page_to_load = current_page - 1;
   else
     page_to_load = current_page + 1;
-  if (get_project_page_from_storage(page_to_load)) {
-    the_projects = get_project_page_from_storage(page_to_load);
-    create_project_layout(the_projects);
-  } else {
-    get_project_page_from_api(page_to_load, function(err, the_projects) {
-      if(err == null)
-        create_project_layout(the_projects);
-      else
-        console.log('error!');
-    });
-  }
+  get_project_page(page_to_load, layout);
   btn.parentNode.parentNode.parentNode.setAttribute('data-page-number', page_to_load);
   var page_number = document.querySelectorAll('.page-number');
   for (var i = 0, max = page_number.length; i < max; i++) {
@@ -93,6 +91,23 @@ function get_project_page(btn){
     for (var i = 0, max = page_number.length; i < max; i++) {
       page_number[i].classList = 'page-turn disabled';
     }
+  }
+}
+
+function get_project_page(page_id, layout){
+  var project_container = document.getElementById('projects');
+  project_container.style.opacity = 0;
+
+  if (get_project_page_from_storage(page_id)) {
+    the_projects = get_project_page_from_storage(page_id);
+    create_project_layout(the_projects, layout);
+  } else {
+    get_project_page_from_api(page_id, function(err, the_projects) {
+      if(err == null)
+        create_project_layout(the_projects, layout);
+      else
+        console.log('error!');
+    });
   }
 }
 

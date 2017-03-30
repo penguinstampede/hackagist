@@ -1,0 +1,20 @@
+<div class="tooltip-wrap">
+  <div class="row">
+    <div class="avatar">
+      <a href="<%=url%>"><img class="image" src="<%=image_url%>" alt="<%=screen_name%>"></a>
+      <p class="location"><i class="fi-flag"></i> <%=location%></p>
+    </div>
+    <div class="summary">
+      <h1><a href="<%=url%>"><%=screen_name%></a></h1>
+      <small>(<%=username%>)</small>
+      <p class="since"><span class="for-sr-only">Joined:</span><i class="fi-clock" title="Joined"></i> <%= moment(created, 'X').fromNow() %></p>
+      <p class="about"><%=about_me%></p>
+    </div>
+  </div>
+  <ul class="meta">
+    <li><span class="for-sr-only">Followers:</span><i class="fi-torsos-all" title="Followers"></i> <%= numeral(followers).format('0[.]0a') %></li>
+    <li><span class="for-sr-only">Following:</span><i class="fi-heart" title="Following"></i> <%= numeral(following).format('0[.]0a') %></li>
+    <li><span class="for-sr-only">Projects:</span><i class="fi-wrench" title="Projects"></i> <%= numeral(projects).format('0[.]0a') %></li>
+    <li><span class="for-sr-only">Skulls:</span><i class="fi-skull" title="Skulls"></i> <%= numeral(skulls).format('0[.]0a') %></li>
+  </ul>
+</div>

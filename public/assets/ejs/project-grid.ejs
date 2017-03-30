@@ -1,0 +1,38 @@
+<% the_projects.projects.forEach(function(project){ %>
+  <% if (project.name) { %>
+  <article class="project col-6-md col-4">
+    <div class="project-wrap">
+      <img class="image" src="<%= project.image_url %>">
+      <hgroup>
+        <h1 class="name"><%= project.name %></h1>
+        <h2 class="owner" data-owner-id="<%= project.owner_id %>"><%= the_owners.find(function(owner) { return owner.id === project.owner_id; }).screen_name %></h2>
+      </hgroup>
+      <div class="summary">
+        <p class="created"><span class="for-sr-only">Created:</span><i class="fi-clock" title="Created"></i> <%= moment(project.created, 'X').fromNow() %></p>
+        <p><%= project.summary %></p>
+        <ul class="meta">
+          <li><span class="for-sr-only">Views:</span><i class="fi-eye" title="Views"></i> <%= numeral(project.views).format('0[.]0a') %></li>
+          <li><span class="for-sr-only">Followers:</span><i class="fi-torsos-all" title="Followers"></i> <%= numeral(project.followers).format('0[.]0a') %></li>
+          <li><span class="for-sr-only">Comments:</span><i class="fi-comment" title="Comments"></i> <%= numeral(project.comments).format('0[.]0a') %></li>
+          <li><span class="for-sr-only">Skulls:</span><i class="fi-skull" title="Skulls"></i> <%= numeral(project.skulls).format('0[.]0a') %></li>
+        </ul>
+        <!---do we need to show more? hide it for now
+        <a class="more" href="#">View More</a>
+         -->
+      </div>
+      <!--- keep hiding...
+      <div class="info">
+        <p class="description"><%= project.description %></p>
+        <% if (project.tags) { %>
+        <ul class="tags">
+        <% project.tags.forEach(function(tag){ %>
+          <li class="tag"><%= tag %></li>
+        <% }); %>
+        </ul>
+        <% } %>
+      </div>
+      -->
+    </div>
+  </article>
+  <% } %>
+<% }); %>

@@ -7,112 +7,44 @@
 * sessionstorage instead of localstorage just in case some info about the user changes... but we don't need to keep re-querying the API!
 **/
 
-function fadeIn(el) {
-  el.style.opacity = 0;
-
-  var last = +new Date();
-  var tick = function() {
-    el.style.opacity = +el.style.opacity + (new Date() - last) / 400;
-    last = +new Date();
-
-    if (+el.style.opacity < 1) {
-      (window.requestAnimationFrame && requestAnimationFrame(tick)) || setTimeout(tick, 16);
-    }
-  };
-
-  tick();
+function getTemplate(file, callback) {
+    var request = new XMLHttpRequest();
+    request.open('GET',file, true);
+    request.onload = function() {
+      if (request.status >= 200 && request.status < 400) {
+        // Success!
+        var resp = request.responseText;
+        return callback(null, resp);
+      } else {
+        return callback(error);
+      }
+    };
+    request.onerror = function() {
+      return callback(error);
+    };
+    request.send();
 }
 
-function show_owner_tooltip(el){
-  //is there already a tooltip showing here?
-  var hgroup = el.parentNode;
-  if(hgroup.querySelector('.tooltip') === null){
-    var owner_id = el.getAttribute('data-owner-id');
-    var info = JSON.parse(get_owner(owner_id));
-    var tooltip = document.createElement("div");
-    tooltip.classList.add('tooltip');
-    var template = document.getElementById('tooltip-template').innerHTML;
-    template = template.replace(/&lt;/g, '<');
-    template = template.replace(/&gt;/g, '>');
-    tooltip.innerHTML = ejs.render(template, info);
-    hgroup.appendChild(tooltip);
-  }
-}
-
-function hide_owner_tooltip(el){
-  var hgroup = el.parentNode;
-  if(el.nextElementSibling !== null){
-    var tooltip = el.nextElementSibling;
-    hgroup.removeChild(tooltip);
-  }
-}
-
-function get_owner(owner_id){
-  if (!get_owner_from_storage(owner_id))
-    return get_owner_from_api(owner_id);
+function hasClass(el, className){
+  if (el.classList)
+    return el.classList.contains(className);
   else
-    return get_owner_from_storage(owner_id);
-}
-
-function get_owner_from_storage(owner_id){
-  //grab sessionstorage, look for owner id, return false if not there
-  if (sessionStorage.getItem('hackagist_owner_' + owner_id))
-    return sessionStorage.getItem('hackagist_owner_' + owner_id);
-  else
-    return false;
-}
-
-function get_owner_from_api(owner_id){
-  var request = new XMLHttpRequest();
-  request.open('GET', 'https://api.hackaday.io/v1/users/' + owner_id + '?api_key=' + hdapi, true);
-  request.onload = function() {
-    if (request.status >= 200 && request.status < 400) {
-      // Success!
-      var resp = request.responseText;
-      sessionStorage.setItem('hackagist_owner_' + owner_id, resp);
-      return resp;
-      //save to sessionstorage to avoid doing this again right away
-    } else {
-      // We reached our target server, but it returned an error
-
-    }
-  };
-
-  request.onerror = function() {
-    // There was a connection error of some sort
-  };
-
-  request.send();
-}
-
-function check_owners(){
-  var project_owners = document.querySelectorAll('.project .owner');
-  Array.prototype.forEach.call(project_owners, function(el, i){
-    var owner_id = el.getAttribute('data-owner-id');
-    get_owner(owner_id);
-  });
+    return new RegExp('(^| )' + className + '( |$)', 'gi').test(el.className);
 }
 
 function start_listening(){
-  imagesLoaded( document.getElementById('projects'), function( instance ) {
-    var msnry = new Masonry( '.row', {
-      itemSelector: '.project'
-    });
-    fadeIn(document.getElementById('projects'));
-  });
-
-
-
-  //get owner info for tooltips
-  var project_owners = document.querySelectorAll('.project .owner');
-  Array.prototype.forEach.call(project_owners, function(el, i){
-    el.addEventListener("mouseenter", function( event ) {
-      show_owner_tooltip(el);
-    }, false);
-    el.parentNode.addEventListener("mouseleave", function( event ) {
-      hide_owner_tooltip(el);
+  //get prev/next page
+  var nav_buttons = document.querySelectorAll('nav .page-turn');
+  Array.prototype.forEach.call(nav_buttons, function(el, i){
+    el.addEventListener("click", function( event ) {
+      event.preventDefault();
+      if(!hasClass(el, 'disabled')){
+        get_project_page(el);
+      }
     }, false);
   });
+
+  refresh_project_grid();
 }
 
 function ready(fn) {
@@ -123,5 +55,6 @@ function ready(fn) {
   }
 }
 
+sessionStorage.setItem('hackagist_page_1', JSON.stringify(projects_pg1));
 check_owners();
 ready(start_listening);

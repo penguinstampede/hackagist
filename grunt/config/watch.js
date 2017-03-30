@@ -7,6 +7,10 @@ module.exports = {
     files: ['assets/js/*.js'],
     tasks: ['uglify:dev']
   },
+  copy: {
+    files: ['assets/ejs/*.ejs'],
+    tasks: ['copy']
+  },
   express: {
     files:  [ '/*.js' ],
     tasks:  [ 'express' ],

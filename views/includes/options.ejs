@@ -1,0 +1,18 @@
+<section class="options container">
+  <div class="row">
+    <div class="view-type col-6 col-6-sm">
+      <ul>
+        <li>Display:</li>
+        <li><a href="#"><i class="fi-thumbnails"></i> Grid</a></li>
+        <li><a href="#"><i class="fi-list"></i> List</a></li>
+      </ul>
+    </div>
+    <nav class="pagination col-6 col-6-sm" data-page-number="<%= the_projects.page %>" data-last-page="<%= the_projects.last_page %>">
+      <ul>
+        <li><a class="page-turn disabled" data-direction="prev" href="#"><span class="for-sr-only">Previous Page</span><i class="fi-arrow-left" title="Previous Page"></i></a></li>
+        <li>Page <span class="page-number"><%= the_projects.page %></span> of <span class="total-pages"><%= the_projects.last_page %></span></li>
+        <li><a class="page-turn" data-direction="next" href="#"><span class="for-sr-only">Next Page</span><i class="fi-arrow-right" title="Next Page"></i></a></li>
+      </ul>
+    </nav>
+  </div>
+</section>

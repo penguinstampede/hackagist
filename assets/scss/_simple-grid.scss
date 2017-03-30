@@ -104,22 +104,29 @@ $breakpoint-xlarge: rem-calc(1660);
       width: $width;
 
       @media only screen and (min-width: $breakpoint-med) {
+        float: none;
         width: (100% / $columns * $i - $gutter);
       }
 
-    }
-
-    &-#{$i}-sm {
-      @media only screen and (max-width: $breakpoint-small) {
-        width: (100% / $columns * $i - $gutter) !important;
-      }
     }
 
     &-#{$i}-md {
       @media only screen and (min-width: $breakpoint-small) and (max-width: $breakpoint-med) {
         width: (100% / $columns * $i - $gutter) !important;
       }
+      @media only screen and (max-width: $breakpoint-small) {
+        float: none;
+        width: (100% / $columns * $i - $gutter) !important;
+      }
     }
+
+    &-#{$i}-sm {
+      @media only screen and (max-width: $breakpoint-small) {
+        float: left;
+        width: (100% / $columns * $i - $gutter) !important;
+      }
+    }
+
 
   }
 

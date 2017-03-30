@@ -34,7 +34,6 @@ describe('index page', () => {
 
   //load the page first
   before( function (done) {
-    this.timeout(0);
     driver.get(url('/'))
       .then( () => { done(); });
   });

@@ -4,7 +4,7 @@
     <div class="project-wrap">
       <img class="image" src="<%= project.image_url %>">
       <hgroup>
-        <h1 class="name"><%= project.name %></h1>
+        <h1 class="name"><a href="<%= project.url %>"><%= project.name %></a></h1>
         <h2 class="owner" data-owner-id="<%= project.owner_id %>"><%= the_owners.find(function(owner) { return owner.id === project.owner_id; }).screen_name %></h2>
       </hgroup>
       <div class="summary">

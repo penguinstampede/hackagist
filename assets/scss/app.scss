@@ -114,6 +114,13 @@ nav.pagination ul{ float: right; }
 
     hgroup, .info, .summary{
       padding: 0 $gutter;
+      h1 a{
+        color: $black;
+        text-decoration: none;
+        &:hover{
+          text-decoration: underline;
+        }
+      }
     }
 
     p{
@@ -170,7 +177,7 @@ nav.pagination ul{ float: right; }
           width: calc(80% - 1rem);
           color: $white;
 
-          h1{ margin: 0; }
+          h1{ margin: 0; a{ color: $white; } }
           small{ font-style: italic; }
           p.since{ margin-top: .25rem; }
 
